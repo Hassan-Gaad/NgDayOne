@@ -12,7 +12,7 @@ export class ProductItemComponent implements OnInit {
     // this.product={
     //   name:"camera",
     //   price:100,
-    //   imgUrl:'./assets/img/layout-styles.png',
+    //   imgUrl:'assets/img/layout-styles.png',
     //   discount:30
     // }
    }
