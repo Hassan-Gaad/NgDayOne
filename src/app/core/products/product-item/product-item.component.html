@@ -1,8 +1,30 @@
 <!-- medium item -->
 
-    <div *ngIf="product.discount" class="item-medium-1__alert">Sale</div>
+
+    <!-- Any property or function can be accessed from here 
+    wether using string interpolation {{propName}}
+    OR
+    using directive as in *ngIf
+    -->
+
+    <!-- To send  element obj to typeScript you can use #refName on any element 
+    and use any event such (click) to pass the element as a parameter within the callback function of the event 
+    as we did with the 'add to cart ' button
+    -->
+
+    <!-- There is an amazing method to get any element using #reference 
+        and @viewChild decorator in ts file 
+        for example we will send the sale element using #saleElem ref
+        go a head and discover :)
+    -->
+
+    <!-- pruduct prop (defind in type script )can be accessed within HTML  -->
+    <div  #saleElem *ngIf="product.discount"  (click)="recievedElem(saleElem)" class="item-medium-1__alert">Sale</div>
     <div class="item-medium-1__image image" [style.backgroundImage]="'url('+product.imgUrl+')'">
-        <a href="#" class="item-medium-1__action">Add to Cart</a>
+        <!--  -->
+
+        <a href="#" #addToCart class="item-medium-1__action" (click)="productClicked()">Add to Cart</a>
+        <!-- <a href="#" #addToCart class="item-medium-1__action" (click)="addItemToChart()">Add to Cart</a> -->
     </div>
     <a href="#">
         <h4>{{product.name}}</h4>

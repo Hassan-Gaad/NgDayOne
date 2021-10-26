@@ -1,4 +1,5 @@
-    <!-- Listing Items -->
+<!-- @Hassan-Gaad -->
+<!-- Listing Items -->
     <div class="container">
 
       <section class="filters">
@@ -20,7 +21,10 @@
         </div>
         <!-- items -->
         <div class="item-listing__items item-listing--3items">
-          <app-product-item *ngFor='let elem of productListArray' [product]='elem' class="item-medium-1">
+          <!-- also product still can be accessed here cause of its within it's component -->
+          
+          <!-- once the productAdded event fired in the app-product-item it wil call the callback function in the parent -->
+          <app-product-item (productAdded)="newProductAddedToCart($event)" *ngFor='let elem of productListArray' [product]='elem' class="item-medium-1">
           </app-product-item>
           <!-- <app-product-item [product]='productListArray[1]' class="item-medium-1"></app-product-item>
                <app-product-item [product]='productListArray[2]' class="item-medium-1"></app-product-item>
