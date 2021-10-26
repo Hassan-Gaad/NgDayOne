@@ -7,6 +7,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { ProductListingComponent } from './core/products/product-listing/product-listing.component';
 import { ProductItemComponent } from './core/products/product-item/product-item.component';
 import { ProductFilterComponent } from './core/products/product-filter/product-filter.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProductFilterComponent } from './core/products/product-filter/product-f
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

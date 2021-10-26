@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-filter',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProductFilterComponent implements OnInit {
   filterList: string[];
   filterTagList: string[];
+  faSearch=faSearch;
   constructor() {
     this.filterList = [
       'Arts & Crafts',

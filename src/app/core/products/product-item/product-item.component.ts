@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, NgModule, OnInit } from '@angular/core';
+import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { Product } from 'src/app/_models/product.model';
 
 @Component({
@@ -8,6 +9,11 @@ import { Product } from 'src/app/_models/product.model';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product!: Product;
+
+  faeye=faEye;
+  faEdit=faEdit;
+  faTrash=faTrashAlt;
+
   constructor() {
     // this.product={
     //   name:"camera",
