@@ -4,8 +4,8 @@
           <div class="search-box">
               <input class="search-box__input" placeholder="Search..." type="text" name="txt_search" id="">
               <button type="submit" class="search-box__btn">
-                  <!-- <i class="fas fa-search"></i> -->
-                  <fa-icon [icon]="faSearch"></fa-icon>
+                  <i class="fas fa-search"></i>
+                  <!-- <fa-icon [icon]="faSearch"></fa-icon> -->
               </button>
           </div>
           <!-- filter list -->
@@ -14,8 +14,8 @@
               <h5>Categories</h5>
               <!-- filter list -->
               <ul class="list list--vr-separator">
-                  <li *ngFor="let filter of filterList" [innerText]="filter" class="link list__item"><i class="link__icon fas fa-angle-right"></i></li>
-
+                  <li *ngFor="let filter of filterList" class="link list__item"><i class="link__icon fas fa-angle-right"></i>{{filter}}</li>
+                  <li class="link list__item"><i class="link__icon fas fa-angle-right"></i>Arts & Crafts</li>
                   <!-- <li class="link list__item"><i class="link__icon fas fa-angle-right"></i>Automotive</li>
                   <li class="link list__item"><i class="link__icon fas fa-angle-right"></i>Baby</li>
                   <li class="link list__item"><i class="link__icon fas fa-angle-right"></i>Books</li>
