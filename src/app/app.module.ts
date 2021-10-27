@@ -8,6 +8,8 @@ import { ProductListingComponent } from './core/products/product-listing/product
 import { ProductItemComponent } from './core/products/product-item/product-item.component';
 import { ProductFilterComponent } from './core/products/product-filter/product-filter.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TestComponent } from './test/test.component';
+import { DropDownComponent } from './shared/drop-down/drop-down.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     ProductListingComponent,
     ProductItemComponent,
-    ProductFilterComponent
+    ProductFilterComponent,
+    TestComponent,
+    DropDownComponent
   ],
   imports: [
     BrowserModule,

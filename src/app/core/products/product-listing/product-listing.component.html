@@ -24,7 +24,9 @@
           <!-- also product still can be accessed here cause of its within it's component -->
           
           <!-- once the productAdded event fired in the app-product-item it wil call the callback function in the parent -->
-          <app-product-item (productAdded)="newProductAddedToCart($event)" *ngFor='let elem of productListArray' [product]='elem' class="item-medium-1">
+          <app-product-item (productAdded)="newProductAddedToCart($event)" *ngFor='let elem of productListTobeViewed' [product]='elem' class="item-medium-1">
+
+          <!-- <app-product-item (productAdded)="newProductAddedToCart($event)" *ngFor='let elem of productListTobeViewed ,let i=index' [product]='elem' (click)="onPageination(i)" class="item-medium-1"> -->
           </app-product-item>
           <!-- <app-product-item [product]='productListArray[1]' class="item-medium-1"></app-product-item>
                <app-product-item [product]='productListArray[2]' class="item-medium-1"></app-product-item>
@@ -48,15 +50,16 @@
         <!-- paging -->
         <div class="paging">
           <!-- left arrow -->
-          <div class="paging__arrow">
+          <div class="paging__arrow" (click)="onPageination(currentPage-1)">
             <i class="fas fa-angle-left"></i>
           </div>
           <!-- page number -->
-          <div class="paging__number active">1</div>
-          <div class="paging__number">2</div>
-          <div class="paging__number">3</div>
+          <!-- create paginations and pass the calculated no of pages that come from the class -->
+          <!--  *ngFor='let elem of productListTobeViewed ,let i=index' [product]='elem' (click)="onPageination(i)" -->
+          <div class="paging__number" *ngFor="let elem of noOfPages, let i=index" (click)="onPageination(i)" [ngClass]="{'active':currentPage==i}" >{{elem}}</div>
+
           <!-- right arrow -->
-          <div class="paging__arrow">
+          <div class="paging__arrow" (click)="onPageination(currentPage+1)">
             <i class="fas fa-angle-right"></i>
           </div>
         </div>

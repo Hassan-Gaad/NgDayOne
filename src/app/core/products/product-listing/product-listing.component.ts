@@ -1,4 +1,4 @@
-import { Component,EventEmitter , OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/_models/product.model';
 
 @Component({
@@ -7,24 +7,48 @@ import { Product } from 'src/app/_models/product.model';
   styleUrls: ['./product-listing.component.scss']
 })
 export class ProductListingComponent implements OnInit {
-  productListArray: Product[];
-  @Output() newProductAdded = new EventEmitter<Product>();
+  @Input() productListArray!: Product[];
+  @Output() newProductAdded !: EventEmitter<Product>;
+
+  //a property of listing component that tells its pagination child ,the no of pages should have
+  noOfPages: number[] = [];//we used it as an array so when using *ngFor it will itrate over the values 1,2,3,4,... in the array then add each per element
+
+  @Input() pageSize!: number; //no of elements per page
+  productListTobeViewed: Product[] = [];
+  currentPage: number = 0;
+
   constructor() {
-    this.productListArray = [
-      {id:1, name: "Camera1", price: 100, imgUrl: "assets/img/layout-styles.png", discount: 20 },
-      {id:2, name: "Camera2", price: 100, imgUrl: "assets/img/layout-styles.png", discount: 40 },
-      {id:3, name: "Camera3", price: 200, imgUrl: "assets/img/layout-styles.png" },
-      {id:4, name: "Camera4", price: 300, imgUrl: "assets/img/layout-styles.png", discount: 60 },
-      {id:5, name: "Camera5", price: 400, imgUrl: "assets/img/layout-styles.png", discount: 20 },
-      {id:6, name: "Camera6", price: 500, imgUrl: "assets/img/layout-styles.png", discount: 10 },
-      {id:7, name: "Camera7", price: 600, imgUrl: "assets/img/layout-styles.png" },
-      {id:8, name: "Camera8", price: 700, imgUrl: "assets/img/layout-styles.png", discount: 30 },
-      {id:9, name: "Camera9", price: 800, imgUrl: "assets/img/layout-styles.png", discount: 30 },
-    ]
+    this.newProductAdded = new EventEmitter<Product>();
   }
 
   ngOnInit(): void {
+    let lenght = Math.ceil(this.productListArray.length / this.pageSize); //(19 items / pageSize 9)=2.3333 using math.ciel to make it 3 
+    for (let i = 0; i < lenght; i++) {
+      this.noOfPages.push(i + 1);//the noOfPages have 1,2,3,...
+    }
+    this.sliceProductList();
+
   }
+
+  /**
+   * Used to slice products list into sections that change each time the currentPage change
+   */
+  sliceProductList() {
+    this.productListTobeViewed = this.productListArray.slice(this.currentPage * this.pageSize, this.currentPage * this.pageSize + this.pageSize);
+  }
+
+  /**
+   * once page item clicked it will increase current page by 1 and slice the array to the new section
+   */
+  onPageination(pageIdx: number) {
+    console.log("pageIDX"+pageIdx);
+    if (pageIdx > -1 && pageIdx <= this.noOfPages.length-1) {  //when click next we have to ensure if the pageIdx within the range
+      this.currentPage = pageIdx;
+      this.sliceProductList();
+    }
+  }
+
+
 
   newProductAddedToCart(product: Product) {
     //recieving the product came from the event of the prodictItemComponent
