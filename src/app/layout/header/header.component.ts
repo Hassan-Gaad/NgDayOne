@@ -12,16 +12,6 @@ import { Product } from 'src/app/_models/product.model';
 export class HeaderComponent implements OnInit {
   @Input() recievedProducts: Product[] = [];
 
-  cardIsOpen:boolean=false;
-
-  faCart = faCartArrowDown;
-  faTimes = faTimes;
-  faDotCircle = faDotCircle;
-  faWhatsapp = faWhatsapp;
-  faEvelop = faEnvelope;
-  faAngelRight = faAngleRight;
-  faAngelDown = faAngleDown;
-
   constructor() {
     // this.filterRecievedProducts();
    }

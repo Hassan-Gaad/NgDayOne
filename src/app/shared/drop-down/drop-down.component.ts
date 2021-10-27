@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./drop-down.component.scss']
 })
 export class DropDownComponent implements OnInit {
-
+  cardIsOpen:boolean=false;
   constructor() { }
 
   ngOnInit(): void {
