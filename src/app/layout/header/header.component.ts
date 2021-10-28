@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { faDotCircle, faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faAngleDown, faAngleRight, faCartArrowDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Product } from 'src/app/_models/product.model';
+import { ProductService } from 'src/app/_services/productService.service';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +8,23 @@ import { Product } from 'src/app/_models/product.model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() recievedProducts: Product[] = [];
+   recievedProducts: Product[] = [];
 
-  constructor() {
+  // productService:ProductService;
+  constructor(private productService:ProductService) { //inject dependency of ProductService
     // this.filterRecievedProducts();
+    // this.productService=new ProductService();
    }
 
   ngOnInit(): void {
-    
+    this.productService.itemAdded.subscribe(
+      (next)=>{
+        console.log(next);
+        this.recievedProducts.push(next);
+      },
+      (err)=>{},
+      ()=>{}
+    )
   }
 
   // fix them later

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/_models/product.model';
+import { ProductService } from 'src/app/_services/productService.service';
 
 @Component({
   selector: 'app-product-listing',
@@ -8,7 +9,6 @@ import { Product } from 'src/app/_models/product.model';
 })
 export class ProductListingComponent implements OnInit {
   @Input() productListArray!: Product[];
-  @Output() newProductAdded !: EventEmitter<Product>;
 
   //a property of listing component that tells its pagination child ,the no of pages should have
   noOfPages: number[] = [];//we used it as an array so when using *ngFor it will itrate over the values 1,2,3,4,... in the array then add each per element
@@ -17,17 +17,25 @@ export class ProductListingComponent implements OnInit {
   productListTobeViewed: Product[] = [];
   currentPage: number = 0;
 
+  productService:ProductService;
+
   constructor() {
-    this.newProductAdded = new EventEmitter<Product>();
+    this.productService=new ProductService();
   }
 
   ngOnInit(): void {
+    
+    //get the product list from the product service
+    this.productListArray=this.productService.getAllProducts();
+
+    //intialize the number of pages
     let lenght = Math.ceil(this.productListArray.length / this.pageSize); //(19 items / pageSize 9)=2.3333 using math.ciel to make it 3 
     for (let i = 0; i < lenght; i++) {
       this.noOfPages.push(i + 1);//the noOfPages have 1,2,3,...
     }
     this.sliceProductList();
 
+   
   }
 
   /**
@@ -48,13 +56,5 @@ export class ProductListingComponent implements OnInit {
     }
   }
 
-
-
-  newProductAddedToCart(product: Product) {
-    //recieving the product came from the event of the prodictItemComponent
-    console.log(`new product added ${product.name}`);
-    this.newProductAdded.emit(product);
-
-  }
 
 }

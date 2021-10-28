@@ -24,7 +24,7 @@
           <!-- also product still can be accessed here cause of its within it's component -->
           
           <!-- once the productAdded event fired in the app-product-item it wil call the callback function in the parent -->
-          <app-product-item (productAdded)="newProductAddedToCart($event)" *ngFor='let elem of productListTobeViewed' [product]='elem' class="item-medium-1">
+          <app-product-item  *ngFor='let elem of productListTobeViewed' [product]='elem' class="item-medium-1">
 
           <!-- <app-product-item (productAdded)="newProductAddedToCart($event)" *ngFor='let elem of productListTobeViewed ,let i=index' [product]='elem' (click)="onPageination(i)" class="item-medium-1"> -->
           </app-product-item>

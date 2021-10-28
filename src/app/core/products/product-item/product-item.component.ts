@@ -1,20 +1,21 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { Product } from 'src/app/_models/product.model';
+import { ProductService } from 'src/app/_services/productService.service';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.scss']
+  styleUrls: ['./product-item.component.scss'],
+  // providers:[ProductService] // we just define this property in the app module (dependIn:Root) 
 })
 export class ProductItemComponent implements OnInit {
   @Input() product!: Product; //get prop from parent so it act as input
   @ViewChild("saleElem") saleElement !: ElementRef; //passing the reference name to the viewChild Decorator
   // and give a property name to the queried element of type ElementRef wich acts as an umberella for all html elements
 
-  @Output() productAdded=new EventEmitter<Product>() //creating the Event
-
-
+  // @Output() productAdded=new EventEmitter<Product>() //creating the Event
+  // productService:ProductService;
 
   /**
    * we need to send product item to the outer parent (product-listing) and the parent will send this data to 
@@ -34,17 +35,8 @@ export class ProductItemComponent implements OnInit {
    * in the callback function 
    */
 
-  faeye=faEye;
-  faEdit=faEdit;
-  faTrash=faTrashAlt;
-
-  constructor() {
-    // this.product={
-    //   name:"camera",
-    //   price:100,
-    //   imgUrl:'assets/img/layout-styles.png',
-    //   discount:30
-    // }
+  constructor(private productService:ProductService) {
+    // this.productService=new ProductService();
    }
 
    
@@ -70,7 +62,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   productClicked(){
-    this.productAdded.emit(this.product); //once the button clicked it will fire the event so we can bind the event property to the component element html in the parent component
+    this.productService.itemAdded.emit(this.product); //once the button clicked it will fire the event so we can bind the event property to the component element html in the parent component
     // and call a function with $event parameter in the parent component 
   }
 

@@ -10,6 +10,7 @@ import { ProductFilterComponent } from './core/products/product-filter/product-f
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TestComponent } from './test/test.component';
 import { DropDownComponent } from './shared/drop-down/drop-down.component';
+import { ProductService } from './_services/productService.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { DropDownComponent } from './shared/drop-down/drop-down.component';
     AppRoutingModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
