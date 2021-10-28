@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ProductService } from 'src/app/_services/productService.service';
 
 @Component({
   selector: 'app-product-filter',
@@ -9,8 +10,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export class ProductFilterComponent implements OnInit {
   filterList: string[];
   filterTagList: string[];
-  faSearch=faSearch;
-  constructor() {
+  constructor(private productService: ProductService) {
     this.filterList = [
       'Arts & Crafts',
       'Automotive',
@@ -28,7 +28,7 @@ export class ProductFilterComponent implements OnInit {
       'Toys & Games',
     ];
 
-    this.filterTagList=[
+    this.filterTagList = [
       "Nike",
       "Travel",
       "Sport",
@@ -46,5 +46,19 @@ export class ProductFilterComponent implements OnInit {
     ]
   }
 
-  ngOnInit(): void {}
+  filterProductList(event: any) {
+    const val = event.target.value;
+    console.log(val);
+    const newProductList = this.productService.getAllProducts().filter((product) => {
+      //  return product.name.includes(val);
+       return product.name.toLowerCase().includes(val.toLowerCase());
+        
+    });
+    console.log(newProductList);
+    this.productService.refreshList.emit(newProductList);
+
+
+  }
+
+  ngOnInit(): void { }
 }
