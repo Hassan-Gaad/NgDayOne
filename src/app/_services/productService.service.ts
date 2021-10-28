@@ -4,6 +4,7 @@ import { Product } from "../_models/product.model";
 export class ProductService {
 
     itemAdded=new EventEmitter<Product>();
+    refreshList=new EventEmitter<Product[]>();
 
     productListArray:Product[] =
         [
@@ -309,8 +310,11 @@ export class ProductService {
     }
 
     deleteProduct(id: number):Product[] {
-        const index=this.productListArray.findIndex(value=>{value.id===id});
+        const index=this.productListArray.findIndex(value=>value.id===id);
+        console.log("index"+index);
         this.productListArray.splice(index,1);
-        return[...this.productListArray];
+        // console.log("on delete");
+        console.log(this.productListArray);
+        return this.productListArray;
     }
 }

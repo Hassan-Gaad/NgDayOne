@@ -66,6 +66,12 @@ export class ProductItemComponent implements OnInit {
     // and call a function with $event parameter in the parent component 
   }
 
+  deleteProduct(id:number){
+    const newProductList=this.productService.deleteProduct(id);
+    console.log(`"after delete" ${newProductList}`);
+    this.productService.refreshList.emit(newProductList)
+  }
+
   
 
   

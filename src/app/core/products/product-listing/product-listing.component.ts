@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/_services/productService.service';
   styleUrls: ['./product-listing.component.scss']
 })
 export class ProductListingComponent implements OnInit {
-  @Input() productListArray!: Product[];
+   productListArray!: Product[];
 
   //a property of listing component that tells its pagination child ,the no of pages should have
   noOfPages: number[] = [];//we used it as an array so when using *ngFor it will itrate over the values 1,2,3,4,... in the array then add each per element
@@ -17,14 +17,22 @@ export class ProductListingComponent implements OnInit {
   productListTobeViewed: Product[] = [];
   currentPage: number = 0;
 
-  productService:ProductService;
 
-  constructor() {
-    this.productService=new ProductService();
+  constructor(private productService:ProductService) {
   }
 
   ngOnInit(): void {
     
+    this.productService.refreshList.subscribe(
+      (next)=>{
+        console.log([...next]);
+        this.productListArray=[...next];
+        this.sliceProductList();
+      },
+      (err)=>{console.log("Couldnt refresh the list because:"+err);},
+      ()=>{}
+    )
+
     //get the product list from the product service
     this.productListArray=this.productService.getAllProducts();
 
