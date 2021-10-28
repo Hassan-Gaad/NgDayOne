@@ -27,6 +27,7 @@ export class ProductListingComponent implements OnInit {
       (next)=>{
         console.log([...next]);
         this.productListArray=[...next];
+        this.currentPage=0;
         this.intializePageNo();
       },
       (err)=>{console.log("Couldnt refresh the list because:"+err);},
@@ -44,6 +45,7 @@ export class ProductListingComponent implements OnInit {
     //intialize the number of pages
     let lenght = Math.ceil(this.productListArray.length / this.pageSize); //(19 items / pageSize 9)=2.3333 using math.ciel to make it 3 
     this.noOfPages=[]; //to prevent each time we call the function adding new pages over the previous
+    
     for (let i = 0; i < lenght; i++) {
       this.noOfPages.push(i + 1);//the noOfPages have 1,2,3,...
     }
