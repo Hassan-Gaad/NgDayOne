@@ -46,6 +46,7 @@ export class ProductFilterComponent implements OnInit {
     ]
   }
 
+  //filter the product list
   filterProductList(event: any) {
     const val = event.target.value;
     console.log(val);
