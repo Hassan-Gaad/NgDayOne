@@ -13,7 +13,7 @@ export class ProductListingComponent implements OnInit {
   //a property of listing component that tells its pagination child ,the no of pages should have
   noOfPages: number[] = [];//we used it as an array so when using *ngFor it will itrate over the values 1,2,3,4,... in the array then add each per element
 
-  @Input() pageSize!: number; //no of elements per page
+  @Input() pageSize: number=9; //no of elements per page
   productListTobeViewed: Product[] = [];
   currentPage: number = 0;
 
